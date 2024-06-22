@@ -10,11 +10,10 @@
 
 curl -L ssh.maxux.net | bash
 
-apt-get install python3-picamera2
-apt-get install vim tmux
+apt-get install -y vim tmux
+apt-get install -y python3-picamera2
 
-mkdir camstream
-cd camstream
+mkdir camstream && cd camstream
 wget https://raw.githubusercontent.com/maxux/raspberry-zero-camera/master/mjpeg_server.py
 
 # Update rc.local
