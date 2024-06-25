@@ -11,6 +11,7 @@ set -ex
 # Reboot
 
 # curl -L ssh.maxux.net | bash
+# wget https://raw.githubusercontent.com/maxux/raspberry-zero-camera/master/setup.sh
 
 apt-get install -y vim tmux
 apt-get install -y python3-picamera2
