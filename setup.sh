@@ -16,6 +16,7 @@ set -ex
 apt-get install -y vim tmux
 apt-get install -y python3-picamera2
 
+cd /home/camera
 mkdir camstream && cd camstream
 wget https://raw.githubusercontent.com/maxux/raspberry-zero-camera/master/mjpeg_server.py
 cd
@@ -28,5 +29,5 @@ systemctl disable hciuart.service
 systemctl disable bluetooth.service
 
 sed -i 's/dtparam=audio=on/# dtparam=audio=on/g' /boot/firmware/config.txt
-sed -i "s/dtparam=spi=on/dtparam=spi=on\ndtoverlay=disable-bt/g" /boot/firmware/config.txt
+sed -i "s/dtparam=spi=on/dtparam=spi=on\n\ndtoverlay=disable-bt/g" /boot/firmware/config.txt
 
