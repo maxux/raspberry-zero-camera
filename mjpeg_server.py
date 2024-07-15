@@ -83,6 +83,14 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     daemon_threads = True
 
 
+"""
+tuning = Picamera2.load_tuning_file("imx708.json")
+picam2 = Picamera2(tuning=tuning)
+
+video_config = picam2.create_video_configuration(main={"size": (4608, 2592)}, controls={'FrameRate': 2}, buffer_count=1)
+picam2.configure(video_config)
+"""
+
 picam2 = Picamera2()
 
 video_config = picam2.create_video_configuration(main={"size": (1920, 1080)}, controls={'FrameRate': 4})
