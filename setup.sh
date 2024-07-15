@@ -32,7 +32,9 @@ make && make install && ldconfig
 cd /home/camera/rtinfo/rtinfo-client
 make
 
-echo "tmux new-sess -s camera -d 'cd /home/camera/camstream && python mjpeg_server.py'" >> /etc/rc.local
+echo 'tmux new-sess -s camera -d -c /home/camera/camstream' >> /etc/rc.local
+echo 'tmux send-keys -t camera "python mjpeg_server.py" ENTER'  >> /etc/rc.local
+
 echo "" >> /etc/rc.local
 echo "/home/camera/rtinfo/rtinfo-client/rtinfo-client --host 10.244.0.253 --daemon" >> /etc/rc.local
 echo "" >> /etc/rc.local
