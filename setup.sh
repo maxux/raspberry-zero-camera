@@ -36,7 +36,7 @@ echo 'tmux new-sess -s camera -d -c /home/camera/camstream' >> /etc/rc.local
 echo 'tmux send-keys -t camera "python mjpeg_server.py" ENTER'  >> /etc/rc.local
 
 echo "" >> /etc/rc.local
-echo "/home/camera/rtinfo/rtinfo-client/rtinfo-client --host 10.244.0.253 --daemon" >> /etc/rc.local
+echo "/home/camera/rtinfo/rtinfo-client/rtinfo-client --host 10.244.0.253 --disk mmcblk --daemon" >> /etc/rc.local
 echo "" >> /etc/rc.local
 
 sed -i '/exit 0/d' /etc/rc.local
@@ -48,4 +48,4 @@ systemctl disable bluetooth.service
 sed -i 's/dtparam=audio=on/# dtparam=audio=on/g' /boot/firmware/config.txt
 sed -i "s/dtparam=spi=on/dtparam=spi=on\n\ndtoverlay=disable-bt/g" /boot/firmware/config.txt
 
-
+# Enable Overlayfs Mode
