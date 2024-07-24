@@ -45,7 +45,41 @@ echo "exit 0" >> /etc/rc.local
 systemctl disable hciuart.service
 systemctl disable bluetooth.service
 
+systemctl mask avahi-daemon
+systemctl disable avahi-daemon
+systemctl stop avahi-daemon
+
+# Remove useless crap
+apt-get remove --purge -y triggerhappy
+
 sed -i 's/dtparam=audio=on/# dtparam=audio=on/g' /boot/firmware/config.txt
 sed -i "s/dtparam=spi=on/dtparam=spi=on\n\ndtoverlay=disable-bt/g" /boot/firmware/config.txt
+
+# Enable Warchdog Reset
+### systemd doesn't support network interface monitoring
+
+## echo >> /etc/systemd/system.conf
+## echo "RuntimeWatchdogSec=15" >> /etc/systemd/system.conf
+## echo "RebootWatchdogSec=2min" >> /etc/systemd/system.conf
+
+# Calm down journald
+echo >> /etc/systemd/journald.conf
+echo "SystemMaxUse=1M" >> /etc/systemd/journald.conf
+
+###
+
+apt-get install -y watchdog
+
+echo >> /etc/watchdog.conf
+echo "watchdog-device = /dev/watchdog" >> /etc/watchdog.conf
+echo "watchdog-timeout = 15" >> /etc/watchdog.conf
+echo "max-load-1 = 24" >> /etc/watchdog.conf
+echo "interface = wlan0" >> /etc/watchdog.conf
+
+systemctl enable watchdog
+systemctl start watchdog
+# systemctl status watchdog
+
+###
 
 # Enable Overlayfs Mode
